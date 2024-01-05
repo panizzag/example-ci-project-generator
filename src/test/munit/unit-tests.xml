@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="unit-tests.xml" />
+	<configuration-properties doc:name="Configuration properties" doc:id="21f059b9-967a-4278-a665-1d20cb59377e" file="config/common.properties" />
+	<munit:test name="unit-tests:return-message" doc:id="c797b676-17cc-4aaa-a51a-52c19267bce8" description="Test">
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="get:\covid19\v1\entities:jhu-sys-api-config" />
+		</munit:enable-flow-sources>
+		<munit:execution >
+			<set-payload value="#[readUrl('classpath://requests/jhu-csv-list.dwl')]" doc:name="Set payload" doc:id="3d5b3743-6cd5-41e0-81e7-452a88c56ff3"/>
+			<flow-ref doc:name="return-message" doc:id="a33b1eb1-08bc-4a87-9c89-4ae4c7b925b5" name="return-message"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that expression="#[payload]" is='#[MunitTools::notNullValue()]' message="The payload is null!" doc:name="Assert That payload is not null" />
+		</munit:validation>
+	</munit:test>
+</mule>

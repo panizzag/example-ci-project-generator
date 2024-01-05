@@ -1,0 +1,12 @@
+{
+	"minMuleVersion": "4.2.2",
+	"secureProperties": [
+		"github.token",
+		"anypointmq.clientId",
+		"anypointmq.clientSecret",
+		"schema.checker.client_id",
+		"schema.checker.client_secret",
+		"anypoint.platform.client_id", 
+		"anypoint.platform.client_secret"
+	]
+}
