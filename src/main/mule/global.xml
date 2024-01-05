@@ -19,16 +19,14 @@ http://www.mulesoft.org/schema/mule/anypoint-mq http://www.mulesoft.org/schema/m
 http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd
 http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
 http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
-	<apikit:config name="jhu-sys-api-config"
-		api="resource::5a0bd415-9488-4e33-88d6-ba31cbef5957:jhu-sys-api:1.0.0:raml:zip:jhu-sys-api.raml"
-		outboundHeadersMapName="outboundHeaders"
-		httpStatusVarName="httpStatus" />
 	<http:listener-config name="HTTP_Listener_config"
 		doc:name="HTTP Listener config"
 		doc:id="24bd6b99-34b5-4036-9c5c-5907a47224fb">
 		<http:listener-connection host="${http.host}"
 			port="${http.port}" />
 	</http:listener-config>
+	<global-property doc:name="Global Property" doc:id="e9c3bd29-f332-4fba-b83b-655e5bdc93fb" name="http.host" value="localhost" />
+	<global-property doc:name="Global Property" doc:id="5151ebd9-49ca-45db-8d80-7546e6ca01ba" name="http.port" value="8089" />
 	
 	
 </mule>

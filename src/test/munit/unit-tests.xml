@@ -10,7 +10,7 @@
 	<munit:config name="unit-tests.xml" />
 	<munit:test name="unit-tests:return-message" doc:id="c797b676-17cc-4aaa-a51a-52c19267bce8" description="Test">
 		<munit:enable-flow-sources >
-			<munit:enable-flow-source value="get:\covid19\v1\entities:jhu-sys-api-config" />
+			<munit:enable-flow-source value="get:\test" />
 		</munit:enable-flow-sources>
 		<munit:execution >
 			<flow-ref doc:name="return-message" doc:id="a33b1eb1-08bc-4a87-9c89-4ae4c7b925b5" name="return-message"/>

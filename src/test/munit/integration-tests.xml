@@ -12,12 +12,14 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="948b152c-9499-4d3c-a69d-54233d1ae6ce" >
 		<http:request-connection host="${http.host}" port="${http.port}" />
 	</http:request-config>
+	<global-property doc:name="Global Property" doc:id="bbd7f5ce-a435-4e6b-ae20-571a9072b4b1" name="http.host" value="localhost" />
+	<global-property doc:name="Global Property" doc:id="7b42cdb2-d108-4dab-bbb8-d6361d5ff8a3" name="http.port" value="8089" />
 	<munit:test name="integration-tests:main" doc:id="c797b676-17cc-4aaa-a51a-52c19267bce8" description="Test">
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="main" />
 		</munit:enable-flow-sources>
 		<munit:execution >
-			<http:request method="GET" doc:name="Request" doc:id="4f525389-6728-4088-b965-e7a73db86735" config-ref="HTTP_Request_configuration" path="/api/covid19/v1/entities"/>
+			<http:request method="GET" doc:name="Request" doc:id="4f525389-6728-4088-b965-e7a73db86735" config-ref="HTTP_Request_configuration" path="/api/test"/>
 		</munit:execution>
 		<munit:validation >
 			<munit-tools:assert-that expression="#[payload]" is='#[MunitTools::notNullValue()]' message="The payload is null!" doc:name="Assert That payload is not null" />

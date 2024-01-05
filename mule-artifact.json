@@ -1,5 +1,5 @@
 {
-	"minMuleVersion": "4.2.2",
+	"minMuleVersion": "4.4.0",
 	"secureProperties": [
 		"github.token",
 		"anypointmq.clientId",

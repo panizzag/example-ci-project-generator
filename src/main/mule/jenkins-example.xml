@@ -8,6 +8,7 @@
 	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 
+	
 	<sub-flow name="return-message" doc:id="8e188da6-0f41-4ecd-ad72-a15a7f3f425a" >
 		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:id="b9bb84ed-666a-42a1-85f0-205bb8435f69">
 			<ee:message>
@@ -25,37 +26,21 @@ output application/json
 	</sub-flow>
 	<flow name="main" doc:id="f71cf1b4-0f4b-4276-af2d-8ac1625f2965">
 		<http:listener config-ref="HTTP_Listener_config"
-			path="/api/*">
+			path="/api/test">
 			<http:response
 				statusCode="#[vars.httpStatus default 200]">
-				<http:headers>#[vars.outboundHeaders default {}]</http:headers>
+				<http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
 			</http:response>
 			<http:error-response
 				statusCode="#[vars.httpStatus default 500]">
-				<http:body>#[payload]</http:body>
-				<http:headers>#[vars.outboundHeaders default {}]</http:headers>
+				<http:body><![CDATA[#[payload]]]></http:body>
+				<http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
 			</http:error-response>
 		</http:listener>
-		<apikit:router config-ref="jhu-sys-api-config" />
+		<flow-ref doc:name="Flow Reference" doc:id="0254b0cb-0139-444e-9499-2277a6f86373" name="get:\test"/>
 
 	</flow>
-	<flow name="console">
-		<http:listener config-ref="HTTP_Listener_config"
-			path="/console/*">
-			<http:response
-				statusCode="#[vars.httpStatus default 200]">
-				<http:headers>#[vars.outboundHeaders default {}]</http:headers>
-			</http:response>
-			<http:error-response
-				statusCode="#[vars.httpStatus default 500]">
-				<http:body>#[payload]</http:body>
-				<http:headers>#[vars.outboundHeaders default {}]</http:headers>
-			</http:error-response>
-		</http:listener>
-		<apikit:console config-ref="jhu-sys-api-config" />
-
-	</flow>
-	<flow name="get:\covid19\v1\entities:jhu-sys-api-config">
+	<flow name="get:\test" doc:id="79017e17-3aae-498f-b654-cd2c8fa55505">
 		<flow-ref doc:name="Flow Reference" doc:id="3d07b82f-de52-4619-99f8-ff4b0aaa5ba5" name="return-message" />
 	</flow>
 </mule>
